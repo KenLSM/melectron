@@ -1,4 +1,5 @@
-const SERVER_URL = "http://localhost:3000";
+const SERVER_URL =
+  "http://ec2-13-229-249-179.ap-southeast-1.compute.amazonaws.com:3000";
 const INFLATION = 1000;
 function updateTime2Server(hostingKey, time) {
   fetch(`${SERVER_URL}/${hostingKey}/${timeInflate(time)}`);

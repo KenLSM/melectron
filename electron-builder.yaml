@@ -1,0 +1,13 @@
+appId: "com.melectron"
+
+mac:
+  electronLanguages:
+    - "en"
+
+win:
+  publish:
+    - github
+  electronLanguages:
+    - "en"
+target:
+  - portable
