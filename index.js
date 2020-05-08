@@ -3,7 +3,7 @@ const URL = window.URL;
 const main = document.getElementById("main");
 
 const input = document.getElementById("vid-input");
-const progressBar = document.getElementById("progress-bar");
+const progressBar = document.getElementById("progress-bar-active");
 const progressBarBase = document.getElementById("progress-bar-base");
 const playBtn = document.getElementById("btn-play");
 const pauseBtn = document.getElementById("btn-pause");
@@ -32,13 +32,25 @@ progressBarBase.onmouseup = () => {
 };
 progressBarBase.onclick = onProgressBarClick;
 input.addEventListener("change", handleVideoInput);
-fullscreenBtn.onclick = () => main.webkitRequestFullscreen();
-exitFullscreenBtn.onclick = () => main.webkitExitFullscreen();
+fullscreenBtn.onclick = onFullscreenBtnPress;
+exitFullscreenBtn.onclick = exitFullscreenBtnPress;
+
+function onFullscreenBtnPress() {
+  main.webkitRequestFullscreen();
+  exitFullscreenBtn.style.display = null;
+  fullscreenBtn.style.display = "none";
+}
+
+function exitFullscreenBtnPress() {
+  document.webkitCancelFullScreen();
+  fullscreenBtn.style.display = null;
+  exitFullscreenBtn.style.display = "none";
+}
 
 function onWindowResize() {
   main.style.height = `${window.innerWidth * 0.5625}px`;
-  console.log("askdj");
 }
+
 function handleVideoInput(event) {
   const file = input.files[0];
   const fileUrl = URL.createObjectURL(file);
