@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' file: data: blob: filesystem: 'unsafe-inline'; connect-src *;"
+    />
+    <title>Hello World!</title>
+  </head>
+  <link href="assets/fontawesome/css/all.min.css" rel="stylesheet" />
+  <body style="user-select: none;" id="body">
+    <div>
+      <div
+        id="main"
+        style="
+          position: relative;
+          height: 640px;
+          width: 100%;
+          background-color: pink;
+        "
+      >
+        <video id="vid-source" width="100%" height="100%"></video>
+
+        <div style="position: absolute; bottom: 0; left: 0; width: 100%;">
+          <div
+            style="
+              background-color: blue;
+              padding: 10px;
+              flex-direction: row;
+              display: flex;
+              justify-content: space-between;
+            "
+          >
+            <div>
+              <i id="btn-play" class="fas fa-play fa-lg"></i>
+              <i
+                id="btn-pause"
+                class="fas fa-pause fa-lg"
+                style="display: none;"
+              ></i>
+              <i class="fas fa-undo fa-lg"></i>
+              <i class="fas fa-redo fa-lg"></i>
+              <i class="fas fa-backward fa-lg"></i>
+              <i class="fas fa-forward fa-lg"></i>
+            </div>
+            <div>
+              <i class="fas fa-expand fa-lg" id="btn-expand"></i>
+              <i class="fas fa-compress fa-lg" id="btn-compress"></i>
+            </div>
+          </div>
+
+          <div
+            style="
+              background-color: green;
+              padding: 10px;
+              padding-bottom: 10px;
+            "
+          >
+            <div>
+              <div
+                id="progress-bar-base"
+                style="
+                  position: relative;
+                  background-color: grey;
+                  width: 100%;
+                  height: 5px;
+                "
+              />
+              <div
+                id="progress-bar"
+                style="
+                  position: relative;
+                  background-color: white;
+                  width: 50%;
+                  height: 5px;
+                "
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <label>Select file:</label>
+      <input type="file" id="vid-input" type="file" accept=".mp4" />
+    </div>
+    <div id="is-host-div">
+      <input
+        type="checkbox"
+        id="is-host-cb"
+        style="pointer-events: none;"
+      /><span>I am hosting</span>
+    </div>
+    <div id="sync-div">
+      <input type="checkbox" id="sync-cb" style="pointer-events: none;" /><span
+        >Enable sync</span
+      >
+    </div>
+    <div id="host-key-div">
+      <input id="host-key-input" type="text" placeholder="Host key" />
+    </div>
+  </body>
+  <script src="./constants.js"></script>
+  <script src="./serverUtils.js"></script>
+  <script src="./index.js"></script>
+</html>

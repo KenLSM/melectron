@@ -1,0 +1,24 @@
+{
+  "name": "melectron",
+  "version": "0.0.1",
+  "description": "Movie syncing app for many clients",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/KenLSM/melectron",
+  "keywords": [
+    "Electron",
+    "movie",
+    "sync"
+  ],
+  "author": "kenlsm",
+  "devDependencies": {
+    "electron": "^8.2.5"
+  },
+  "dependencies": {
+    "electron-packager": "^14.2.1",
+    "electron-reload": "^1.5.0"
+  },
+  "private": true
+}
