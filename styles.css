@@ -43,18 +43,18 @@
 
 .controls-top:hover {
   transition: 300ms;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 #progress-bar-base {
-  background-color: #040400;
+  background-color: darkgrey;
   width: 100%;
 }
 
 #progress-bar-active {
   /* position: absolute; */
   background-color: red;
-  width: 10%;
+  width: 0%;
 }
 
 .progress-bar {
@@ -63,6 +63,7 @@
 }
 
 .progress-bar-container:hover {
+  background-color: rgba(255, 255, 255, 0.4);
   height: 6px;
   padding-bottom: 8px;
   transition: 100ms;
@@ -73,4 +74,8 @@
   height: 2px;
   padding: 10px;
   opacity: 0.8;
+}
+
+.ic-padding-right-5 {
+  padding-right: 5px;
 }

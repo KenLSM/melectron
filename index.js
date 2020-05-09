@@ -13,16 +13,25 @@ const isHostDiv = document.getElementById("is-host-div");
 const isHostCheckbox = document.getElementById("is-host-cb");
 const syncDiv = document.getElementById("sync-div");
 const syncCheckbox = document.getElementById("sync-cb");
+
+const undoBtn = document.getElementById("btn-undo");
+const redoBtn = document.getElementById("btn-redo");
+
 let vidSource;
 let totalDuration = 0;
+let videoLoaded = false;
 
+// initial resize
 onWindowResize();
+
 window.addEventListener("resize", onWindowResize);
 
 playBtn.onclick = onPlayBtnPress;
 pauseBtn.onclick = onPlayBtnPress;
 isHostDiv.onclick = onIsHostBtnPress;
 syncDiv.onclick = onSyncBtnPress;
+undoBtn.onclick = () => moveTimerBy(-5);
+redoBtn.onclick = () => moveTimerBy(5);
 
 progressBarBase.onmousedown = () => {
   progressBarBase.onmousemove = onProgressBarClick;
@@ -62,15 +71,17 @@ function handleVideoInput(event) {
 
 function onVideoLoaded(vidSource) {
   console.log("onVideoLoaded");
-  progressBar.style.width = "10%";
+  videoLoaded = true;
+
   onProgressBarClick({ offsetX: 0 });
+  const durationText = document.getElementById("duration-text");
+  durationText.innerHTML = toHumanTime(vidSource.duration);
 }
 
 function onProgressBarClick(event) {
   console.log("onProgressBarClick");
   const percent = event.offsetX / progressBarBase.clientWidth;
-  vidSource.currentTime = percent * vidSource.duration;
-  progressBar.style.width = `${percent * 100}%`;
+  setCurTime(percent * vidSource.duration);
 }
 function onPlayBtnPress() {
   if (vidSource.paused) {
@@ -90,8 +101,14 @@ function onSyncBtnPress() {
   syncCheckbox.checked = !syncCheckbox.checked;
 }
 
+function moveTimerBy(delta) {
+  if (!videoLoaded) return;
+
+  setCurTime(vidSource.currentTime + delta);
+}
+
 async function synchronizer() {
-  if (!syncCheckbox.checked) return;
+  if (!syncCheckbox.checked || !videoLoaded) return;
   const isHost = isHostCheckbox.checked;
   const hostKey = document.getElementById("host-key-input").value;
   if (isHost) {
@@ -106,12 +123,27 @@ async function synchronizer() {
 
 function syncTime(time) {
   const delta = Math.abs(vidSource.currentTime - time);
-  console.log(vidSource.currentTime - time);
-  console.log(delta);
+  console.log("Delta: " + (vidSource.currentTime - time));
 
   if (delta > RESYNC_THRESHOLD) {
-    vidSource.currentTime = time;
+    setCurTime(time);
   }
 }
 
+function setCurTime(time) {
+  vidSource.currentTime = time;
+  updateVideoTime({ forced: true });
+}
+
+function updateVideoTime(options) {
+  const { forced } = options || {};
+  if (!videoLoaded || (vidSource.paused && !forced)) return;
+  const curTimeText = document.getElementById("cur-time-text");
+
+  const percent = vidSource.currentTime / vidSource.duration;
+  progressBar.style.width = `${percent * 100}%`;
+  curTimeText.innerHTML = toHumanTime(vidSource.currentTime);
+}
+
 setInterval(synchronizer, 1000);
+setInterval(updateVideoTime, 300);

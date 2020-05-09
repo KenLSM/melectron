@@ -18,7 +18,7 @@
         position: relative;
         height: 640px;
         width: 100%;
-        background-color: silver;
+        background-color: black;
         overflow: hidden;
       "
     >
@@ -32,18 +32,23 @@
         </div>
         <div class="controls-top">
           <div class="hover-opacity">
-            <i id="btn-play" class="fas fa-play fa-lg"></i>
+            <i id="btn-play" class="fas fa-play fa-lg ic-padding-right-5"></i>
             <i
               id="btn-pause"
-              class="fas fa-pause fa-lg"
+              class="fas fa-pause fa-lg ic-padding-right-5"
               style="display: none;"
             ></i>
-            <!-- <i class="fas fa-undo fa-lg"></i>
-              <i class="fas fa-redo fa-lg"></i>
-              <i class="fas fa-backward fa-lg"></i>
+            <i id="btn-undo" class="fas fa-undo fa-lg ic-padding-right-5"></i>
+            <i id="btn-redo" class="fas fa-redo fa-lg ic-padding-right-5"></i>
+            <!-- <i class="fas fa-backward fa-lg"></i>
               <i class="fas fa-forward fa-lg"></i> -->
           </div>
-          <div>
+          <div style="flex-direction: row; display: flex;">
+            <div style="padding-right: 10px;">
+              <span id="cur-time-text">0:00</span>
+              <span>/</span>
+              <span id="duration-text">0:00</span>
+            </div>
             <i class="fas fa-expand fa-lg" id="btn-expand"></i>
             <i
               class="fas fa-compress fa-lg"
@@ -81,6 +86,7 @@
     </div>
   </body>
   <script src="./constants.js"></script>
+  <script src="./utils.js"></script>
   <script src="./serverUtils.js"></script>
   <script src="./index.js"></script>
 </html>
