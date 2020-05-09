@@ -28,6 +28,8 @@ window.addEventListener("resize", onWindowResize);
 
 playBtn.onclick = onPlayBtnPress;
 pauseBtn.onclick = onPlayBtnPress;
+main.onclick = onPlayBtnPress;
+
 isHostDiv.onclick = onHostBtnPress;
 syncDiv.onclick = onSyncBtnPress;
 undoBtn.onclick = () => moveTimerBy(-5);
@@ -41,19 +43,24 @@ progressBarBase.onmouseup = () => {
 };
 progressBarBase.onclick = onProgressBarClick;
 input.addEventListener("change", handleVideoInput);
-fullscreenBtn.onclick = onFullscreenBtnPress;
-exitFullscreenBtn.onclick = exitFullscreenBtnPress;
 
-function onFullscreenBtnPress() {
+fullscreenBtn.onclick = handleFullscreenToggle;
+exitFullscreenBtn.onclick = handleFullscreenToggle;
+main.ondblclick = handleFullscreenToggle;
+
+function handleFullscreenToggle() {
+  if (document.fullscreenElement) {
+    document.webkitCancelFullScreen();
+
+    fullscreenBtn.style.display = null;
+    exitFullscreenBtn.style.display = "none";
+    return;
+  }
+
   main.webkitRequestFullscreen();
+
   exitFullscreenBtn.style.display = null;
   fullscreenBtn.style.display = "none";
-}
-
-function exitFullscreenBtnPress() {
-  document.webkitCancelFullScreen();
-  fullscreenBtn.style.display = null;
-  exitFullscreenBtn.style.display = "none";
 }
 
 function onWindowResize() {
@@ -128,12 +135,22 @@ async function synchronizer() {
   const isHost = isHostCheckbox.checked;
   const hostKey = document.getElementById("host-key-input").value;
   if (isHost) {
-    updateTime2Server(hostKey, vidSource.currentTime);
+    updateTime2Server(hostKey, vidSource.currentTime, {
+      paused: vidSource.paused,
+    });
     return;
   }
 
   const data = await getDataFromServer(hostKey);
   console.log(data);
+  if (data.paused && !vidSource.paused) {
+    onPlayBtnPress();
+    setCurTime(data.time);
+  }
+  if (!data.paused && vidSource.paused) {
+    onPlayBtnPress();
+    setCurTime(data.time);
+  }
   syncTime(timeDeflate(data.time));
 }
 

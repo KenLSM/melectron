@@ -1,1 +1,1 @@
-const RESYNC_THRESHOLD = 1;
+const RESYNC_THRESHOLD = 0.6;
