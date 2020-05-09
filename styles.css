@@ -1,3 +1,14 @@
+:root {
+  --primary: 255, 255, 250;
+  --secondary: 81, 80, 82;
+  --bg-color: 0, 1, 3;
+  --alt-color: 52, 50, 57;
+  --highlight: 255, 49, 46;
+}
+
+body {
+  font-family: Roboto, sans-serif;
+}
 @keyframes fadeIn {
   from {
     opacity: 0.5;
@@ -18,10 +29,7 @@
 }
 
 .controls {
-  /* background-color: red; */
-  /* margin-bottom: -40px; */
   padding-top: 30%;
-
   position: absolute;
   bottom: -60px;
   left: 0;
@@ -29,31 +37,30 @@
 }
 
 .controls:hover {
-  bottom: 0px;
+  bottom: -5px;
   transition: 300ms;
 }
 
-.controls-top {
+.controls-buttons {
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(var(--primary), 0.2);
   flex-direction: row;
   display: flex;
   justify-content: space-between;
 }
 
-.controls-top:hover {
+.controls-buttons:hover {
   transition: 300ms;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(var(--primary), 0.6);
 }
 
 #progress-bar-base {
-  background-color: darkgrey;
+  background-color: rgb(var(--alt-color));
   width: 100%;
 }
 
 #progress-bar-active {
-  /* position: absolute; */
-  background-color: red;
+  background-color: rgb(var(--highlight));
   width: 0%;
 }
 
@@ -62,20 +69,60 @@
   top: -1px;
 }
 
+.progress-bar-container {
+  background-color: rgba(var(--primary), 0.1);
+  height: 2px;
+  padding: 10px;
+  opacity: 0.8;
+}
 .progress-bar-container:hover {
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(var(--primary), 0.6);
   height: 6px;
   padding-bottom: 8px;
   transition: 100ms;
   opacity: 1;
 }
-.progress-bar-container {
-  background-color: rgba(255, 255, 255, 0.1);
-  height: 2px;
-  padding: 10px;
-  opacity: 0.8;
-}
 
 .ic-padding-right-5 {
   padding-right: 5px;
+}
+
+.color-explaner {
+  padding: 10px;
+  text-transform: capitalize;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+.color-primary {
+  background-color: rgb(var(--primary));
+}
+.color-secondary {
+  background-color: rgb(var(--secondary));
+  color: rgb(var(--primary));
+}
+.color-alt {
+  background-color: rgb(var(--alt-color));
+  color: rgb(var(--primary));
+}
+.color-bg {
+  background-color: rgb(var(--bg-colorg));
+  color: rgb(var(--primary));
+}
+.color-highlight {
+  background-color: rgb(var(--highlight));
+  color: rgb(var(--primary));
+}
+
+.checkbox-container {
+  padding: 6px;
+  background-color: rgb(var(--alt-color));
+  color: rgb(var(--primary));
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-right: 4px;
+}
+.checkbox-container-active {
+  background-color: rgb(var(--highlight));
+  color: rgb(var(--primary));
 }

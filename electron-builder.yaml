@@ -9,5 +9,3 @@ win:
     - github
   electronLanguages:
     - "en"
-target:
-  - portable

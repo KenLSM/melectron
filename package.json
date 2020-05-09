@@ -6,10 +6,12 @@
   "main": "main.js",
   "scripts": {
     "start": "ENV=DEV electron .",
+    "start:prod": "electron .",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "build:win": "electron-builder -w --ia32",
-    "build:mac": "electron-builder -m"
+    "build:mac": "electron-builder -m",
+    "clean": "rm -rf dist"
   },
   "repository": "https://github.com/KenLSM/melectron",
   "keywords": [

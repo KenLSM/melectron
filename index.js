@@ -28,7 +28,7 @@ window.addEventListener("resize", onWindowResize);
 
 playBtn.onclick = onPlayBtnPress;
 pauseBtn.onclick = onPlayBtnPress;
-isHostDiv.onclick = onIsHostBtnPress;
+isHostDiv.onclick = onHostBtnPress;
 syncDiv.onclick = onSyncBtnPress;
 undoBtn.onclick = () => moveTimerBy(-5);
 redoBtn.onclick = () => moveTimerBy(5);
@@ -64,6 +64,10 @@ function handleVideoInput(event) {
   const file = input.files[0];
   const fileUrl = URL.createObjectURL(file);
 
+  console.log(file);
+  const title = document.getElementById("header-title");
+  title.innerHTML = file.name + " — Melectron";
+
   vidSource = document.getElementById("vid-source");
   vidSource.src = fileUrl;
   vidSource.onloadedmetadata = () => onVideoLoaded(vidSource);
@@ -94,11 +98,23 @@ function onPlayBtnPress() {
   playBtn.style.display = null;
   pauseBtn.style.display = "none";
 }
-function onIsHostBtnPress() {
+function onHostBtnPress() {
   isHostCheckbox.checked = !isHostCheckbox.checked;
+  if (isHostCheckbox.checked) {
+    isHostDiv.classList.add("checkbox-container-active");
+    return;
+  }
+  isHostDiv.classList.remove("checkbox-container-active");
+  return;
 }
 function onSyncBtnPress() {
   syncCheckbox.checked = !syncCheckbox.checked;
+  if (syncCheckbox.checked) {
+    syncDiv.classList.add("checkbox-container-active");
+    return;
+  }
+  syncDiv.classList.remove("checkbox-container-active");
+  return;
 }
 
 function moveTimerBy(delta) {

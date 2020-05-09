@@ -7,7 +7,7 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'self' file: data: blob: filesystem: 'unsafe-inline'; connect-src *;"
     />
-    <title>Hello World!</title>
+    <title id="header-title">Melectron</title>
   </head>
   <link rel="stylesheet" type="text/css" href="styles.css" />
   <link href="assets/fontawesome/css/all.min.css" rel="stylesheet" />
@@ -30,7 +30,7 @@
             <div id="progress-bar-active" class="progress-bar"></div>
           </div>
         </div>
-        <div class="controls-top">
+        <div class="controls-buttons">
           <div class="hover-opacity">
             <i id="btn-play" class="fas fa-play fa-lg ic-padding-right-5"></i>
             <i
@@ -65,24 +65,34 @@
         <label>Select file:</label>
         <input type="file" id="vid-input" type="file" accept=".mp4" />
       </div>
-
-      <div id="is-host-div">
-        <input
-          type="checkbox"
-          id="is-host-cb"
-          style="pointer-events: none;"
-        /><span>I am hosting</span>
-      </div>
-      <div id="sync-div">
-        <input
-          type="checkbox"
-          id="sync-cb"
-          style="pointer-events: none;"
-        /><span>Enable sync</span>
+      <div style="display: flex; flex-direction: row;">
+        <div id="is-host-div" class="checkbox-container">
+          <input
+            type="checkbox"
+            id="is-host-cb"
+            style="pointer-events: none;"
+            hidden
+          /><span>Hosting</span>
+        </div>
+        <div id="sync-div" class="checkbox-container">
+          <input
+            type="checkbox"
+            id="sync-cb"
+            style="pointer-events: none;"
+            hidden
+          /><span>Enable Sync</span>
+        </div>
       </div>
       <div id="host-key-div">
         <input id="host-key-input" type="text" placeholder="Host key" />
       </div>
+    </div>
+    <div style="display: flex; flex-direction: row;">
+      <div class="color-primary color-explaner"><span>primary</span></div>
+      <div class="color-secondary color-explaner"><span>secondary</span></div>
+      <div class="color-alt color-explaner"><span>alt</span></div>
+      <div class="color-bg color-explaner"><span>bg</span></div>
+      <div class="color-highlight color-explaner"><span>highlight</span></div>
     </div>
   </body>
   <script src="./constants.js"></script>
