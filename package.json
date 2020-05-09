@@ -1,7 +1,7 @@
 {
   "name": "melectron",
   "productName": "melectron",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Movie syncing app for many clients",
   "main": "main.js",
   "scripts": {
