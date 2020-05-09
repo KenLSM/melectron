@@ -57,7 +57,7 @@ function exitFullscreenBtnPress() {
 }
 
 function onWindowResize() {
-  main.style.height = `${window.innerWidth * 0.5625}px`;
+  main.style.height = `${main.clientWidth * 0.5625}px`;
 }
 
 function handleVideoInput(event) {
