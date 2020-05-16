@@ -47,6 +47,7 @@ input.addEventListener("change", handleVideoInput);
 fullscreenBtn.onclick = handleFullscreenToggle;
 exitFullscreenBtn.onclick = handleFullscreenToggle;
 main.ondblclick = handleFullscreenToggle;
+main.onkeydown = handleVideoKeyboardPress;
 
 function handleFullscreenToggle() {
   if (document.fullscreenElement) {
@@ -130,6 +131,16 @@ function moveTimerBy(delta) {
   setCurTime(vidSource.currentTime + delta);
 }
 
+function moveVolumeBy(delta) {
+  if (!videoLoaded) return;
+  const val = clamp(vidSource.volume + delta, 0.0, 1.0);
+  vidSource.volume = val;
+
+  document.getElementById("cur-volume-text").innerHTML = (
+    vidSource.volume * 100
+  ).toFixed(0);
+}
+
 async function synchronizer() {
   if (!syncCheckbox.checked || !videoLoaded) return;
   const isHost = isHostCheckbox.checked;
@@ -178,5 +189,40 @@ function updateVideoTime(options) {
   curTimeText.innerHTML = toHumanTime(vidSource.currentTime);
 }
 
+function handleVideoKeyboardPress(event) {
+  switch (event.key) {
+    case "ArrowUp":
+      moveVolumeBy(0.1);
+      event.preventDefault();
+      break;
+    case "ArrowDown":
+      moveVolumeBy(-0.1);
+      event.preventDefault();
+      break;
+    case "ArrowLeft":
+      moveTimerBy(-5);
+      break;
+    case "j":
+      moveTimerBy(-10);
+      break;
+    case "l":
+      moveTimerBy(10);
+      break;
+    case "ArrowRight":
+      moveTimerBy(5);
+      break;
+    case "k":
+    case " ":
+      onPlayBtnPress();
+      event.preventDefault();
+      break;
+    case "f":
+      handleFullscreenToggle();
+      break;
+    default:
+      console.log(event.key);
+      return;
+  }
+}
 setInterval(synchronizer, 1000);
 setInterval(updateVideoTime, 300);

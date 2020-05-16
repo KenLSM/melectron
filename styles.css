@@ -126,3 +126,7 @@ body {
   background-color: rgb(var(--highlight));
   color: rgb(var(--primary));
 }
+
+#main:focus {
+  outline: none;
+}

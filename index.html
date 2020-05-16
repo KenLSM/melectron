@@ -20,6 +20,7 @@
         background-color: black;
         overflow: hidden;
       "
+      tabindex="0"
     >
       <video id="vid-source" width="100%" height="100%"></video>
 
@@ -43,6 +44,11 @@
               <i class="fas fa-forward fa-lg"></i> -->
           </div>
           <div style="flex-direction: row; display: flex;">
+            <div style="padding-right: 10px;">
+              <span>Volume:</span>
+              <span id="cur-volume-text">100</span>
+              <span>%</span>
+            </div>
             <div style="padding-right: 10px;">
               <span id="cur-time-text">0:00</span>
               <span>/</span>
