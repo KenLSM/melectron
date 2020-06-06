@@ -142,8 +142,10 @@ function moveVolumeBy(delta) {
 }
 
 async function synchronizer() {
-  if (!syncCheckbox.checked || !videoLoaded) return;
+  if (!videoLoaded) return;
+  // if is not host -> must enable sync
   const isHost = isHostCheckbox.checked;
+  if (!isHost && !syncCheckbox.checked) return;
   const hostKey = document.getElementById("host-key-input").value;
   if (isHost) {
     updateTime2Server(hostKey, vidSource.currentTime, {
